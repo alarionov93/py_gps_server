@@ -12,6 +12,9 @@ class BaseModel(Model):
 class Point(BaseModel):
     lat = FloatField(null=True, unique=False, default=0)
     lon = FloatField(null=True, unique=False, default=0)
+    alt = FloatField(null=True, unique=False, default=0)
+    speed = FloatField(null=True, unique=False, default=0)
+
     token = CharField(unique=False, null=False, default="test")
     created_at = DateTimeField(default=datetime.datetime.now())
 
