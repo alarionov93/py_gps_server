@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import models
 import config
 
@@ -81,5 +81,13 @@ def list():
     })
 
 
+@app.route('/view', methods=['GET', ])
+def view():
+    # points = models.Point.select().order_by(models.Point.created_at.desc())
+    # data = [point.json_map for point in points]
+
+    return render_template("map.html")
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)

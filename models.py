@@ -25,3 +25,8 @@ class Point(BaseModel):
     @property
     def json(self):
         return {'lat': self.lat, 'lon': self.lon, 'created_at': self.time_str}
+
+    @property
+    def json_map(self):
+        return [self.lat, self.lon]
+    
