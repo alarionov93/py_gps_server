@@ -48,7 +48,7 @@ def serve():
 
     speed_raw = request.args.get('speed', '0')
 
-    token = request.args.get('device', None)
+    token = request.args.get('device', 1)
 
 
     if not lat_raw or not lon_raw or not token:
