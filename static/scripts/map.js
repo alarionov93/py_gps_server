@@ -19,7 +19,7 @@
           var points = [];
           console.log(data);
           for (var i = 0; i < data["points"].length; i++) {
-              points.push(new YMaps.GeoPoint(data["points"][i]["lat"], data["points"][i]["lon"]));
+              points.push([data["points"][i]["lat"], data["points"][i]["lon"]]);
           }
           var pts = drawPts(points);
           shown = ymaps.geoQuery(pts).addToMap(myMap).applyBoundsToMap(myMap, {checkZoomRange: true});
