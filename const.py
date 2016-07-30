@@ -1,0 +1,1 @@
+LAST_IDX = -10 # used for getting the last locations

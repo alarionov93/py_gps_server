@@ -17,12 +17,18 @@
             // shown.removeFromMap(myMap);
           // }
           var points = [];
+          var last_idx = data["points"].length - 1;
+          var last = [data["points"][last_idx]["lat"], data["points"][last_idx]["lon"]];
           console.log(data);
           for (var i = 0; i < data["points"].length; i++) {
               points.push([data["points"][i]["lat"], data["points"][i]["lon"]]);
           }
           var pts = drawPts(points);
           shown = ymaps.geoQuery(pts).addToMap(myMap).applyBoundsToMap(myMap, {checkZoomRange: true});
+          var placemark = new YMaps.Placemark(last);
+          placemark.name = "Имя метки";
+          placemark.description = "Описание метки";
+          myMap.addOverlay(placemark);
         });
       // }, 5000);
     }
@@ -45,7 +51,7 @@ function drawPts(a) {
     // Ширина линии.
     strokeWidth: 6,
     // Коэффициент прозрачности.
-    strokeOpacity: 1
+    strokeOpacity: 0.8
   });
 
   return myPolyline;

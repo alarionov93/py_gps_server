@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import models
 import config
-
+import const
 app = Flask(__name__)
 
 
@@ -17,12 +17,13 @@ def write_to_log(data):
         f.write("Recieved parameter: %s \r\n" % data)
 
 
-def write_to_db(lat, lon, alt, speed):
+def write_to_db(lat, lon, alt, speed, token):
     point = models.Point()
     point.lat = lat
     point.lon = lon
     point.alt = alt
     point.speed = speed
+    point.token = token
     point.save()
 
 
@@ -47,11 +48,13 @@ def serve():
 
     speed_raw = request.args.get('speed', '0')
 
+    token = request.args.get('device', None)
 
-    if not lat_raw or not lon_raw:
+
+    if not lat_raw or not lon_raw or not token:
         return jsonify({
             'error': 400,
-            'message': 'Bad request. Provide lat-lon or latitude-longitude',
+            'message': 'Bad request. Provide lat-lon or latitude-longitude and a token',
         })
 
     lat = convert_coordinate(lat_raw)
@@ -59,7 +62,7 @@ def serve():
     alt = float(alt_raw)
     speed = float(speed_raw)
 
-    write_to_db(lat, lon, alt, speed)
+    write_to_db(lat, lon, alt, speed, token)
 
     return jsonify({
         'error': 0,
@@ -73,7 +76,7 @@ def serve():
 @app.route('/list', methods=['GET', ])
 def list():
     points = models.Point.select().order_by(models.Point.created_at.desc())
-    data = [point.json for point in points]
+    data = [point.json for point in points][const.LAST_IDX:]
 
     return jsonify({
         'points': data,
