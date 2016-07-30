@@ -25,7 +25,7 @@
           }
           var pts = drawPts(points);
           shown = ymaps.geoQuery(pts).addToMap(myMap).applyBoundsToMap(myMap, {checkZoomRange: true});
-          var placemark = new YMaps.Placemark(last);
+          var placemark = new ymaps.Placemark(last);
           placemark.name = "Имя метки";
           placemark.description = "Описание метки";
           myMap.addOverlay(placemark);
