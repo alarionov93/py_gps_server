@@ -75,6 +75,12 @@ def serve():
 
 @app.route('/list?token=<device_id>', methods=['GET', ])
 def list(device_id):
+    if not device_id:
+        return jsonify({
+            'points': [],
+            'error': 1,
+            'status': 'Need to pass your device ID.'
+        })
     points = models.Point.select().filter(token=device_id).order_by(models.Point.created_at.desc())
     data = [point.json for point in points][const.LAST_IDX:]
 

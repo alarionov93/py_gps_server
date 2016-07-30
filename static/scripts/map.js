@@ -12,7 +12,7 @@
     	});
       
       // setInterval(function(){
-        $.get('/list', function(data) {
+        $.get('/list?token=1', function(data) {
           // if (shown != null) {
             // shown.removeFromMap(myMap);
           // }
@@ -28,8 +28,8 @@
           shown = ymaps.geoQuery(pts).addToMap(myMap).applyBoundsToMap(myMap, {checkZoomRange: true});
           var placemark = new ymaps.Placemark(last, 
             {
-              balloonContent: last_date,
-              iconContent: "Последнее местоположение"
+              balloonContent: "<h7>Последнее местоположение:</h7><p>" + last_date + "</p>",
+              iconContent: ""
             },
             {
               preset: "twirl#yellowStretchyIcon",
