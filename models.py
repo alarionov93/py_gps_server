@@ -17,7 +17,7 @@ class Point(BaseModel):
     # new_field = FloatField(null=True, unique=False, default=0)
 
     token = CharField(unique=False, null=False, default="test")
-    created_at = DateTimeField(default=datetime.datetime.now())
+    created_at = DateTimeField(default=datetime.datetime.now)
 
     @property
     def time_str(self):

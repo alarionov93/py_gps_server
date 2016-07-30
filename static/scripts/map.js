@@ -19,16 +19,27 @@
           var points = [];
           var last_idx = data["points"].length - 1;
           var last = [data["points"][last_idx]["lat"], data["points"][last_idx]["lon"]];
+          var last_date = data["points"][last_idx]["created_at"];
           console.log(data);
           for (var i = 0; i < data["points"].length; i++) {
               points.push([data["points"][i]["lat"], data["points"][i]["lon"]]);
           }
           var pts = drawPts(points);
           shown = ymaps.geoQuery(pts).addToMap(myMap).applyBoundsToMap(myMap, {checkZoomRange: true});
-          var placemark = new ymaps.Placemark(last);
-          placemark.name = "Имя метки";
-          placemark.description = "Описание метки";
-          myMap.addOverlay(placemark);
+          var placemark = new ymaps.Placemark(last, 
+            {
+              balloonContent: last_date,
+              iconContent: "Последнее местоположение"
+            },
+            {
+              preset: "twirl#yellowStretchyIcon",
+              // Отключаем кнопку закрытия балуна.
+              balloonCloseButton: false,
+              // Балун будем открывать и закрывать кликом по иконке метки.
+              hideIconOnBalloonOpen: false
+            });
+
+          myMap.geoObjects.add(placemark);
         });
       // }, 5000);
     }
