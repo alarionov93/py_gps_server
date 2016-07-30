@@ -17,8 +17,8 @@
             // shown.removeFromMap(myMap);
           // }
           console.log(data);
-          // var pts = drawPts(data["data"]);
-          // shown = ymaps.geoQuery(pts).addToMap(myMap).applyBoundsToMap(myMap, {checkZoomRange: true});
+          var pts = drawPts(data["data"]);
+          shown = ymaps.geoQuery(pts).addToMap(myMap).applyBoundsToMap(myMap, {checkZoomRange: true});
         });
       // }, 5000);
     }
