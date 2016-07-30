@@ -73,8 +73,9 @@ def serve():
     })
 
 
-@app.route('/list?token=<device_id>', methods=['GET', ])
-def list(device_id):
+@app.route('/list', methods=['GET', 'POST'])
+def list():
+    device_id = request.args.get('token', None)
     if not device_id:
         return jsonify({
             'points': [],
