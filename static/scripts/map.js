@@ -17,7 +17,7 @@
             // shown.removeFromMap(myMap);
           // }
           console.log(data);
-          var pts = drawPts(data["data"]);
+          var pts = drawPts(data["points"]);
           shown = ymaps.geoQuery(pts).addToMap(myMap).applyBoundsToMap(myMap, {checkZoomRange: true});
         });
       // }, 5000);
