@@ -101,6 +101,7 @@ def view():
 
 @app.route('/err', methods=['GET', ])
 def err():
+    print(request.args)
     error = request.args.get('error', None)
     device_id = request.args.get('device', None)
     if not device_id:
