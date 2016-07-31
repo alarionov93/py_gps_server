@@ -3,7 +3,13 @@ import models
 import config
 import datetime
 import const
+import logging
+
 app = Flask(__name__)
+
+handler = logging.FileHandler('/home/py_gps_server/server.log')  # errors logged to this file
+handler.setLevel(logging.INFO) # log info and above
+app.logger.addHandler(handler)  # attach the handler to the app's logger
 
 
 def convert_coordinate(coord):
