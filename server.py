@@ -99,10 +99,11 @@ def list():
 
 @app.route('/view', methods=['GET', ])
 def view():
-    # points = models.Point.select().order_by(models.Point.created_at.desc())
-    # data = [point.json_map for point in points]
-
-    return render_template("map.html")
+    reports = models.Report.select().order_by(models.Report.created_at.asc())
+    # ctx = {
+    #     'reports': reports
+    # }
+    return render_template("log.html", reports=reports)
 
 
 @app.route('/err', methods=['GET', ])
