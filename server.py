@@ -102,14 +102,23 @@ def view():
 @app.route('/err', methods=['GET', ])
 def err():
     error = request.args.get('error', None)
+    device_id = request.args.get('device', None)
+    if not device_id:
+        return jsonify({
+            'error': 1,
+            'status': 'Need to pass your device ID.'
+        })
     if not error:
         return jsonify({
+            'error': 1,
+            'status': 'Error msg is not passed.',
             'reported': 0
         })
 
     write_to_log(error)
 
     return jsonify({
+        'error': 0,
         'reported': 1,
     })
 
