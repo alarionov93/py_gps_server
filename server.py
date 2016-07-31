@@ -99,5 +99,20 @@ def view():
     return render_template("map.html")
 
 
+@app.route('/err', methods=['GET', ])
+def err():
+    error = request.args.get('error', None)
+    if not error:
+        return jsonify({
+            'reported': 0
+        })
+
+    write_to_log(error)
+
+    return jsonify({
+        'reported': 1,
+    })
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

@@ -10,9 +10,9 @@
     	}, {
     		autoFitToViewport: 'always'
     	});
-      
+      var myDeviceId = "13450633605839585280";
       // setInterval(function(){
-        $.get('/list?token=1', function(data) {
+        $.get('/list?token='+myDeviceId, function(data) {
           // if (shown != null) {
             // shown.removeFromMap(myMap);
           // }
@@ -34,7 +34,7 @@
             {
               preset: "twirl#yellowStretchyIcon",
               // Отключаем кнопку закрытия балуна.
-              balloonCloseButton: false,
+              balloonCloseButton: true,
               // Балун будем открывать и закрывать кликом по иконке метки.
               hideIconOnBalloonOpen: false
             });
