@@ -89,7 +89,7 @@ def list():
             'status': 'Need to pass your device ID.'
         })
     points = models.Point.select().filter(token=device_id).order_by(models.Point.created_at.asc())
-    reports = models.Report.select().filter(token=device_id).order_by(models.Report.created_at.asc())
+    reports = models.Report.select().filter(device_id=device_id).order_by(models.Report.created_at.asc())
     data = [point.json for point in points][const.LAST_IDX:]
     reports = [r.json for r in reports]
 
