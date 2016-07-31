@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import models
 import config
+import datetime
 import const
 app = Flask(__name__)
 
@@ -26,6 +27,11 @@ def write_to_db(lat, lon, alt, speed, token):
     point.token = token
     point.save()
 
+def write_log_to_db(error, device):
+    report = models.Report()
+    report.error_desc = error
+    report.device_id = device
+    report.save()
 
 @app.route("/")
 def hello():
@@ -115,13 +121,23 @@ def err():
             'status': 'Error msg is not passed.',
             'reported': 0
         })
-
-    write_to_log(error)
+    data = '[Error: %s, Device ID: %s, Created at: %s ]'\
+           % (error, device_id, datetime.datetime.now().strftime("%d.%m.%Y, %H:%M:%S"))
+    write_to_log(data)
+    write_log_to_db(error, device_id)
 
     return jsonify({
         'error': 0,
         'reported': 1,
     })
+
+
+@app.route('/log', methods=['GET', ])
+def log():
+    # points = models.Point.select().order_by(models.Point.created_at.desc())
+    # data = [point.json_map for point in points]
+
+    return render_template("log.html")
 
 
 if __name__ == '__main__':
