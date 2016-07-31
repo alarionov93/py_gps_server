@@ -82,7 +82,7 @@ def list():
             'error': 1,
             'status': 'Need to pass your device ID.'
         })
-    points = models.Point.select().filter(token=device_id).order_by(models.Point.created_at.desc())
+    points = models.Point.select().filter(token=device_id).order_by(models.Point.created_at.asc())
     data = [point.json for point in points][const.LAST_IDX:]
 
     return jsonify({
