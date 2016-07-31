@@ -20,7 +20,7 @@
           var reports = "";
           
           for (var i = 0; i < data["reports"].length; i++) {
-            reports ++ "<p>"+data["reports"][i].["created_at"]+" | "+data["reports"][i].["device_id"]+" | "+data["reports"][i].["error_desc"]+"</p>";
+            reports += "<p>"+data["reports"][i].["created_at"]+" | "+data["reports"][i].["device_id"]+" | "+data["reports"][i].["error_desc"]+"</p>";
           }
           $("#reports").innerHTML(reports);
           var last_idx = data["points"].length - 1;
