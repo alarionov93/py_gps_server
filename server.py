@@ -7,10 +7,6 @@ import logging
 
 app = Flask(__name__)
 
-handler = logging.FileHandler('/home/py_gps_server/server.log')  # errors logged to this file
-handler.setLevel(logging.INFO) # log info and above
-app.logger.addHandler(handler)  # attach the handler to the app's logger
-
 
 def convert_coordinate(coord):
     degrees = float(coord[:2])
@@ -149,3 +145,7 @@ def err():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
+
+    handler = logging.FileHandler('/home/py_gps_server/server.log')  # errors logged to this file
+    handler.setLevel(logging.DEBUG) # log debug and above
+    app.logger.addHandler(handler)  # attach the handler to the app's logger
