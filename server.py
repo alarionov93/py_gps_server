@@ -89,21 +89,21 @@ def list():
             'status': 'Need to pass your device ID.'
         })
     points = models.Point.select().filter(token=device_id).order_by(models.Point.created_at.asc())
+    reports = models.Report.select().filter(token=device_id).order_by(models.Report.created_at.asc())
     data = [point.json for point in points][const.LAST_IDX:]
+    reports = [r.json for r in reports]
 
     return jsonify({
         'points': data,
+        'reports': reports,
         'error': 0,
     })
 
 
 @app.route('/view', methods=['GET', ])
 def view():
-    reports = models.Report.select().order_by(models.Report.created_at.asc())
-    # ctx = {
-    #     'reports': reports
-    # }
-    return render_template("log.html", reports=reports)
+
+    return render_template("map.html")
 
 
 @app.route('/err', methods=['GET', ])
@@ -133,12 +133,12 @@ def err():
     })
 
 
-@app.route('/log', methods=['GET', ])
-def log():
-    # points = models.Point.select().order_by(models.Point.created_at.desc())
-    # data = [point.json_map for point in points]
-
-    return render_template("log.html")
+# @app.route('/log', methods=['GET', ])
+# def log():
+#     # points = models.Point.select().order_by(models.Point.created_at.desc())
+#     # data = [point.json_map for point in points]
+#
+#     return render_template("log.html")
 
 
 if __name__ == '__main__':
