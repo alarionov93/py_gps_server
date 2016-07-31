@@ -22,7 +22,7 @@
           for (var i = 0; i < data["reports"].length; i++) {
             reports += "<p>"+data["reports"][i]["created_at"]+" | "+data["reports"][i]["device_id"]+" | "+data["reports"][i]["error_desc"]+"</p>";
           }
-          $("#reports").innerHTML = reports;
+          $("#reports").append(reports);
           var last_idx = data["points"].length - 1;
           var last = [data["points"][last_idx]["lat"], data["points"][last_idx]["lon"]];
           var last_date = data["points"][last_idx]["created_at"];
