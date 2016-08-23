@@ -8,6 +8,6 @@ pip install -r requirements.txt
 python ./migrate.py
 
 # Run server
-python ./server.py
+sudo python ./server.py
 
 ```
